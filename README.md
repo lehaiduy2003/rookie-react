@@ -1,54 +1,129 @@
-# React + TypeScript + Vite
+# React E-commerce Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a modern e-commerce web application built with React, Tailwind CSS, and TypeScript. It provides a user-friendly shopping experience for customers and powerful management tools for administrators.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Customer Features
 
-## Expanding the ESLint configuration
+- **Home Page**: Dynamic category menu and featured product showcase
+- **Product Browsing**: Browse products by categories
+- **Product Details**: View comprehensive product information including:
+  - Product name and high-quality images
+  - Detailed descriptions
+  - Pricing
+  - Customer ratings and reviews
+- **User Authentication**: Secure register and login/logout functionality
+- **Product Rating**: Ability to rate and review products
+- **Responsive Design**: Optimized for desktop and mobile devices
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Admin Features
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Secure Admin Panel**: Role-based authentication system
+- **Category Management**: Create, edit, and delete product categories
+- **Product Management**: Comprehensive product administration with:
+  - Basic information (name, price)
+  - Category assignment
+  - Description editor
+  - Image upload and management
+  - Featured product designation
+  - Creation and update timestamps
+- **Customer Management**: View and manage customer accounts with:
+  - Contact information
+  - Account details
+  - Account creation and update history
+
+## 🛠️ Technology Stack
+
+- **Frontend**: React 19.0.0 with TypeScript
+- **Styling**: Tailwind CSS 4.1.4
+- **State Management**: Zustand 5.0.3
+- **API Communication**: Axios 1.8.4
+- **Form Validation**: Zod 3.24.3
+- **Build Tool**: Vite 6.3.1
+
+## 📋 Prerequisites
+
+- Node.js (18.x or higher)
+- npm or yarn
+
+## 🔧 Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Navigate to the project directory:
+
+   ```bash
+   cd rookie-react
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open your browser and visit:
+   ```bash
+   http://localhost:5173
+   ```
+
+## 📝 Project Structure
+
+```bash
+  assignment-react/
+├── src/
+│   ├── assets/        # Static assets like images
+│   ├── components/    # Reusable UI components
+│   ├── contexts/      # React contexts for state management
+│   ├── hooks/         # Custom React hooks
+│   ├── layouts/       # Layout components
+│   ├── pages/         # Application pages
+│   ├── services/      # API services
+│   ├── store/         # Zustand state stores
+│   ├── types/         # TypeScript type definitions
+│   ├── utils/         # Utility functions
+│   ├── App.tsx        # Main application component
+│   └── main.tsx       # Application entry point
+├── public/            # Public assets
+├── [index.html](http://_vscodecontentref_/1)         # HTML template
+├── [tsconfig.json](http://_vscodecontentref_/2)      # TypeScript configuration
+├── [vite.config.ts](http://_vscodecontentref_/3)     # Vite configuration
+└── [package.json](http://_vscodecontentref_/4)       # Project dependencies and scripts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Deployment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Build the project for production:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm run build
+```
+
+The build artifacts will be stored in the dist/ directory.
+
+## 📚 Additional Information
+
+- The authentication system uses JWT tokens for secure user sessions
+- Product images are managed through a CDN for optimal performance
+- The admin panel is protected with role-based access control
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+```bash
+The README.md has been updated with the e-commerce website documentation.The README.md has been updated with the e-commerce website documentation.
 ```

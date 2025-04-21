@@ -1,4 +1,5 @@
 import CategoryNavbar from "./components/CategoryNavbar";
+import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 
 function App() {
@@ -8,6 +9,8 @@ function App() {
       {/* Category */}
       <CategoryNavbar />
       <main className="flex-1">{/* Your main content here */}</main>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

@@ -16,6 +16,7 @@ export const ProductSchema = z.object({
   ]), // default image url and can be null
   isActive: z.boolean(),
   avgRating: z.number().nonnegative().min(0).max(5),
+  ratingCount: z.number().nonnegative(),
 });
 
 export type Product = z.infer<typeof ProductSchema>;

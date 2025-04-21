@@ -1,0 +1,72 @@
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+
+// You'll need to install crypto-js: npm install crypto-js
+// And its types: npm install --save @types/crypto-js
+
+// Secret key for encryption (ideally store this in environment variables)
+const ENCRYPTION_KEY = import.meta.env.VITE_ENCRYPTION_KEY;
+
+interface AuthState {
+  userId: string | null;
+  encryptedToken: string | null;
+  isAuthenticated: boolean;
+  login: (userId: string, accessToken: string) => void;
+  logout: () => void;
+  getAccessToken: () => string | null;
+}
+
+const useAuthStore = create<AuthState>()(
+  persist(
+    (set, get) => ({
+      userId: null,
+      encryptedToken: null,
+      isAuthenticated: false,
+
+      // Encrypt token during login
+      login: (userId: string, accessToken: string) => {
+        const encryptedToken = CryptoJS.AES.encrypt(accessToken, ENCRYPTION_KEY).toString();
+
+        set({ userId, encryptedToken, isAuthenticated: true });
+      },
+
+      logout: () => set({ userId: null, encryptedToken: null, isAuthenticated: false }),
+
+      // Decrypt token when needed
+      getAccessToken: () => {
+        const { encryptedToken } = get();
+        if (!encryptedToken) return null;
+
+        try {
+          const bytes = CryptoJS.AES.decrypt(encryptedToken, ENCRYPTION_KEY);
+          return bytes.toString(CryptoJS.enc.Utf8);
+        } catch (error) {
+          console.error("Failed to decrypt token:", error);
+          return null;
+        }
+      },
+    }),
+    {
+      name: "auth-storage",
+      storage: {
+        getItem: (name) => {
+          const data = sessionStorage.getItem(name);
+          return data === null ? null : JSON.parse(data);
+        },
+        setItem: (name, value) => sessionStorage.setItem(name, JSON.stringify(value)),
+        removeItem: (name) => sessionStorage.removeItem(name),
+      },
+      // Only persist these specific state items
+      partialize: (state) => ({
+        userId: state.userId,
+        encryptedToken: state.encryptedToken,
+        isAuthenticated: state.isAuthenticated,
+        login: state.login,
+        logout: state.logout,
+        getAccessToken: state.getAccessToken,
+      }),
+    }
+  )
+);
+
+export default useAuthStore;

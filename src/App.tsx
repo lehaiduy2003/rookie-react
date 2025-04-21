@@ -1,4 +1,5 @@
 import CategoryNavbar from "./components/CategoryNavbar";
+import FeaturedProductView from "./components/FeaturedProductView";
 import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 
@@ -8,7 +9,10 @@ function App() {
       <Header />
       {/* Category */}
       <CategoryNavbar />
-      <main className="flex-1">{/* Your main content here */}</main>
+      <main className="flex-1">
+        {/* Featured product list view */}
+        <FeaturedProductView />
+      </main>
       {/* Footer */}
       <Footer />
     </div>

@@ -8,7 +8,6 @@ export const ProductDetailSchema = ProductSchema.extend({
   description: z.string(),
   category: CategorySchema,
   quantity: z.number().nonnegative(),
-  ratingCount: z.number().nonnegative(),
   createdOn: z.coerce.date(),
   updatedOn: z.coerce.date(),
   ratings: z.array(RatingSchema),

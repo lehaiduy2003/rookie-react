@@ -1,7 +1,6 @@
-// src/services/api.ts
-import useAuthStore from "@/stores/AuthStore";
+import useAuthStore from "@/stores/authStore";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
-import refreshToken from "./RefreshTokenHandler";
+import refreshToken from "./refreshTokenHandler";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,

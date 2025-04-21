@@ -1,21 +1,29 @@
-import CategoryNavbar from "./components/CategoryNavbar";
-import FeaturedProductView from "./components/FeaturedProductView";
-import Footer from "./components/layout/Footer";
-import Header from "./components/layout/Header";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Products from "./pages/Products";
+import ProductDetails from "./pages/ProductDetails";
+import PrivateRoute from "./configs/PrivateRoute";
+import AdminDashboard from "./pages/AdminDashboard";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      {/* Category */}
-      <CategoryNavbar />
-      <main className="flex-1">
-        {/* Featured product list view */}
-        <FeaturedProductView />
-      </main>
-      {/* Footer */}
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/products/:id" element={<ProductDetails />} />
+      <Route
+        path="/admin"
+        element={
+          <PrivateRoute>
+            <AdminDashboard />
+          </PrivateRoute>
+        }
+      />
+    </Routes>
   );
 }
 

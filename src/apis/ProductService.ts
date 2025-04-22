@@ -20,7 +20,8 @@ class ProductService extends BaseService {
       const response = await this.http.get<ProductPaging>(`/v1/products?${queryString}`);
       return response.data;
     }
-    // If no param is provided, fetch all products
+    // If no param is provided, fetch the default endpoint
+    // the backend handled the default value for pageNo, pageSize, sortBy, and sortDir,...
     const response = await this.http.get<ProductPaging>("/v1/products");
     return response.data;
   }
@@ -65,37 +66,6 @@ class ProductService extends BaseService {
    */
   async deleteProductById(id: number): Promise<void> {
     await this.http.delete(`/v1/products/${id}`);
-  }
-
-  /**
-   * Fetches products by categoryId from the API.
-   * @param categoryId The categoryId to filter products.
-   * @returns {Promise<Product[]>} A promise that resolves to an array of products in the specified categoryId.
-   */
-  async getProductsByCategoryId(
-    categoryId: string,
-    param: Record<string, string>
-  ): Promise<ProductPaging> {
-    if (param) {
-      const queryString = super.buildParams(param);
-      const response = await this.http.get<ProductPaging>(
-        `/v1/products/category/${categoryId}?${queryString}`
-      );
-      return response.data;
-    }
-    const response = await this.http.get<ProductPaging>(`/v1/products/category/${categoryId}`);
-    return response.data;
-  }
-
-  /**
-   * Fetches products by search query from the API.
-   * @param params The search query to filter products.
-   * @returns {Promise<Product[]>} A promise that resolves to an array of products matching the search query.
-   */
-  async searchProducts(params: Record<string, string>): Promise<ProductPaging> {
-    const queryString = super.buildParams(params);
-    const response = await this.http.get<ProductPaging>(`/v1/products/search?${queryString}`);
-    return response.data;
   }
 
   /**

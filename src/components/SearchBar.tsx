@@ -13,7 +13,7 @@ const SearchBar = ({ className }: SearchBarProps) => {
   const handleSearch = (e: FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      window.location.href = `/search?q=${encodeURIComponent(searchQuery.trim())}`;
+      window.location.href = `/products?name=${searchQuery}`;
     }
   };
 

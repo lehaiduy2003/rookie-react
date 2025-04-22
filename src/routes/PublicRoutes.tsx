@@ -1,8 +1,8 @@
 import Home from "@/pages/home/Home";
-import Login from "@/pages/Login/Login";
-import ProductDetails from "@/pages/ProductDetail/ProductDetails";
+import Login from "@/pages/login/Login";
+import ProductDetails from "@/pages/productDetail/ProductDetails";
 import Products from "@/pages/products/Products";
-import Register from "@/pages/Register/Register";
+import Register from "@/pages/register/Register";
 import { Route } from "react-router-dom";
 import { Fragment } from "react";
 

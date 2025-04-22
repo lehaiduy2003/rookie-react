@@ -40,11 +40,11 @@ function addSubscriber(callback: (token: string) => void) {
 api.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
-    // Check if the error is due to a 401 Unauthorized response
+    // Check if the error is due to a 403 Unauthorized response
     const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
 
-    // If the error is a 401 and the request has not been retried yet
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // If the error is a 403 and the request has not been retried yet
+    if (error.response?.status === 403 && !originalRequest._retry) {
       // If the request has not been retried yet, set the _retry flag to true
       // and try to refresh the token
       originalRequest._retry = true;

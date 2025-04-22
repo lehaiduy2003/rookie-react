@@ -13,7 +13,9 @@ interface refreshTokenResponse {
  */
 export default async function refreshToken(): Promise<refreshTokenResponse> {
   try {
-    const response = await axios.get("/v1/auth/refresh");
+    const response = await axios.get("/v1/auth/refresh", {
+      withCredentials: true, // fetch this api with cookies
+    });
     return response.data;
   } catch (error) {
     console.error("Refresh token error:", error);

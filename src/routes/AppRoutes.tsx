@@ -7,20 +7,21 @@ import ProductDetails from "@/pages/productDetail/ProductDetails";
 import PrivateRoute from "@/components/PrivateRoute";
 import AdminDashboard from "@/pages/adminDashboard/AdminDashboard";
 import MainLayout from "@/layouts/MainLayout";
+import AuthLayout from "@/layouts/AuthLayout";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* <PublicRoutes />
-      <AdminRoutes /> */}
       <Route path="/" element={<MainLayout />}>
         {/* Public routes */}
         <Route index element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />
-        {/* Add more public routes here */}
+      </Route>
+      {/* Authentication routes - no use the main layout */}
+      <Route path="/auth" element={<AuthLayout />}>
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
       </Route>
       {/* Admin routes */}
       <Route

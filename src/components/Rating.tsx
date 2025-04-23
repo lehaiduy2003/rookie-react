@@ -1,8 +1,8 @@
 import { Star, StarHalf } from "lucide-react";
 
 interface RatingProps {
-  avgRating: number;
-  ratingCount: number;
+  avgRating: number | null;
+  ratingCount?: number;
 }
 
 /**
@@ -56,16 +56,19 @@ const renderStars = (avgRating: number) => {
 const Rating = ({ avgRating, ratingCount }: RatingProps) => {
   return (
     <div className="text-sm text-muted-foreground mt-1">
-      {ratingCount > 0 ? (
-        // Display stars and review count when ratings exist
+      {avgRating != null && avgRating > 0 ? (
         <div className="flex items-center">
           {/* Star rating display */}
           <div className="flex">{renderStars(avgRating)}</div>
-          {/* Review count */}
-          <span className="ml-1">({ratingCount} reviews)</span>
+          {/* // For comments and reviews in product detail page, no need to show review in rating comment */}
+          {ratingCount != null && ratingCount > 0 && (
+            // Display review count when ratings exist
+            <span className="ml-1">({ratingCount} reviews)</span>
+          )}
         </div>
       ) : (
-        <span>No ratings yet</span>
+        // Display stars and review count when ratings exist
+        <div className="text-gray-500">No ratings yet</div>
       )}
     </div>
   );

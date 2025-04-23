@@ -1,5 +1,3 @@
-import Footer from "@/components/layout/Footer";
-import Header from "@/components/layout/Header";
 import { useEffect, useState } from "react";
 import { ProductPaging } from "@/types/Product";
 import ProductService from "@/apis/ProductService";
@@ -86,38 +84,34 @@ const Products = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex flex-col md:flex-row m-10 md:mx-auto w-full max-w-screen-2xl flex-grow">
-        <div className="hidden md:block w-1/4 mr-4">
-          <h1 className="text-2xl font-bold mb-2">Filter</h1>
-          <FilterSideBar />
-        </div>
-        <div className="w-full md:w-3/4">
-          <div className="flex flex-row justify-between mb-6">
-            <div>
-              <h1 className="text-2xl font-bold mb-2">Results</h1>
-              <p className="text-sm text-muted-foreground mb-4">
-                {productPaging?.totalElements || 0} items found
-              </p>
-            </div>
-            <SortSelecting />
+    <div className="container w-full mx-auto px-4 py-8 flex flex-col md:flex-row">
+      <div className="hidden md:block w-1/4 mr-4">
+        <h1 className="text-2xl font-bold mb-2">Filter</h1>
+        <FilterSideBar />
+      </div>
+      <div className="w-full md:w-3/4">
+        <div className="flex flex-row justify-between mb-6">
+          <div>
+            <h1 className="text-2xl font-bold mb-2">Results</h1>
+            <p className="text-sm text-muted-foreground mb-4">
+              {productPaging?.totalElements || 0} items found
+            </p>
           </div>
-          <ProductList products={productPaging?.content} isLoading={isLoading} />
-
-          {/* Display pagination only when data is available */}
-          {productPaging && !isLoading && (
-            <div className="mt-6">
-              <CustomPagination
-                totalPages={productPaging.totalPages}
-                currentPage={pageFromUrl}
-                onPageChange={handlePageChange}
-              />
-            </div>
-          )}
+          <SortSelecting />
         </div>
-      </main>
-      <Footer />
+        <ProductList products={productPaging?.content} isLoading={isLoading} />
+
+        {/* Display pagination only when data is available */}
+        {productPaging && !isLoading && (
+          <div className="mt-6">
+            <CustomPagination
+              totalPages={productPaging.totalPages}
+              currentPage={pageFromUrl}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

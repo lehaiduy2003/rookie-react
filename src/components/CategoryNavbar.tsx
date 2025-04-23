@@ -28,21 +28,19 @@ const CategoryNavbar = () => {
   }
 
   return (
-    <nav className="w-full bg-[#FB6E52] py-3">
-      <div className="max-w-screen-2xl mx-auto px-4">
-        <ul className="flex items-center justify-center gap-12 overflow-x-auto">
-          {categories.map((category) => (
-            <li key={category.id}>
-              <a
-                href={`/products?category=${category.id}`}
-                className="text-white text-sm font-medium hover:text-white/70 transition-colors whitespace-nowrap"
-              >
-                {category.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <nav className="bg-[#FB6E52] py-3 w-screen">
+      <ul className="flex items-center justify-center gap-12 overflow-x-auto">
+        {categories.map((category) => (
+          <li key={category.id}>
+            <a
+              href={`/products?category=${category.id}`}
+              className="text-white text-sm font-medium hover:text-white/70 transition-colors whitespace-nowrap"
+            >
+              {category.name}
+            </a>
+          </li>
+        ))}
+      </ul>
     </nav>
   );
 };

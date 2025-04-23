@@ -31,7 +31,7 @@ class ProductService extends BaseService {
    * @param id The ID of the product to fetch.
    * @returns {Promise<ProductDetail>} A promise that resolves to the product details.
    */
-  async getProduct(id: number): Promise<ProductDetail> {
+  async getProduct(id: string): Promise<ProductDetail> {
     const response = await this.http.get<ProductDetail>(`/v1/products/${id}`);
     return response.data;
   }

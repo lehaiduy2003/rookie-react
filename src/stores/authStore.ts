@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import CryptoJS from "crypto-js";
+import { UserDetail } from "@/types/UserDetail";
 
 // You'll need to install crypto-js: npm install crypto-js
 // And its types: npm install --save @types/crypto-js
@@ -9,9 +11,10 @@ const ENCRYPTION_KEY = import.meta.env.VITE_ENCRYPTION_KEY;
 
 interface AuthState {
   userId: string | null;
+  userDetail: UserDetail | null;
   encryptedToken: string | null;
   isAuthenticated: boolean;
-  login: (userId: string, accessToken: string) => void;
+  login: (userId: string, userDetail: UserDetail, accessToken: string) => void;
   logout: () => void;
   getAccessToken: () => string | null;
 }
@@ -20,17 +23,19 @@ const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
       userId: null,
+      userDetail: null,
       encryptedToken: null,
       isAuthenticated: false,
 
       // Encrypt token during login
-      login: (userId: string, accessToken: string) => {
+      login: (userId: string, userDetail: UserDetail, accessToken: string) => {
         const encryptedToken = CryptoJS.AES.encrypt(accessToken, ENCRYPTION_KEY).toString();
 
-        set({ userId, encryptedToken, isAuthenticated: true });
+        set({ userId, userDetail, encryptedToken, isAuthenticated: true });
       },
 
-      logout: () => set({ userId: null, encryptedToken: null, isAuthenticated: false }),
+      logout: () =>
+        set({ userId: null, userDetail: null, encryptedToken: null, isAuthenticated: false }),
 
       // Decrypt token when needed
       getAccessToken: () => {
@@ -59,6 +64,7 @@ const useAuthStore = create<AuthState>()(
       // Only persist these specific state items
       partialize: (state) => ({
         userId: state.userId,
+        userDetail: state.userDetail,
         encryptedToken: state.encryptedToken,
         isAuthenticated: state.isAuthenticated,
         login: state.login,

@@ -58,7 +58,7 @@ api.interceptors.response.use(
           const data = await refreshToken();
 
           // Update the token in the AuthStore
-          authStore.login(authStore.userId!, data.accessToken);
+          authStore.login(authStore.userId!, authStore.userDetail!, data.accessToken);
 
           isRefreshing = false;
           // Update the Authorization header with the new token

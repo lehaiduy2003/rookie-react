@@ -7,7 +7,7 @@ const AuthButtons = () => {
   return (
     <div className="flex items-center space-x-4">
       {isAuthenticated ? (
-        <div>
+        <>
           <Button variant="outline" className="w-32">
             <User className="mr-2" />
             Profile
@@ -23,7 +23,7 @@ const AuthButtons = () => {
           >
             Logout
           </Button>
-        </div>
+        </>
       ) : (
         <>
           <Button

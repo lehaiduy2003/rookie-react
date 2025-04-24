@@ -1,9 +1,10 @@
 import useAuthStore from "@/stores/authStore";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import refreshToken from "./refreshTokenHandler";
+import { VITE_API_URL } from "./env";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: VITE_API_URL,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",

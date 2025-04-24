@@ -6,6 +6,28 @@ import BaseService from "./BaseService";
  * This class provides methods for logging in, logging out, and refreshing tokens.
  */
 class AuthService extends BaseService {
+  async register(
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    phoneNumber: string
+  ): Promise<Auth> {
+    try {
+      const response = await this.http.post("/v1/auth/register", {
+        email,
+        password,
+        firstName,
+        lastName,
+        phoneNumber,
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Registration error:", error);
+      throw error;
+    }
+  }
+
   /**
    * Logs in a user with the provided email and password.
    * It sends a POST request to the /auth/login endpoint with the user's credentials.

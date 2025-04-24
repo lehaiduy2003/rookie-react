@@ -22,7 +22,6 @@ const ProductDetails = () => {
   // Fetch product details
   useEffect(() => {
     if (!id) return;
-
     setIsLoading(true);
     ProductService.getProduct(id)
       .then((data) => {
@@ -72,7 +71,7 @@ const ProductDetails = () => {
   }
 
   // Error state
-  if (!product) {
+  if (!id || !product) {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
         <h2 className="text-2xl font-bold">Product not found</h2>
@@ -165,8 +164,7 @@ const ProductDetails = () => {
 
       {/* Additional product information tabs */}
       <div className="mt-12">
-        <h3 className="font-bold">Review from Customer</h3>
-        <ReviewList ratings={product.ratings} />
+        <ReviewList ratings={product.ratings} productId={id} />
       </div>
     </div>
   );

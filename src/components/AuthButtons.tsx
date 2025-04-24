@@ -35,7 +35,7 @@ const AuthButtons = () => {
           </Button>
           <Button
             variant="outline"
-            className="w-32"
+            className="w-32 bg-primary text-white"
             onClick={() => (window.location.href = "/auth/register")}
           >
             Register

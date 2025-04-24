@@ -2,12 +2,13 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import CryptoJS from "crypto-js";
 import { UserDetail } from "@/types/UserDetail";
+import { VITE_ENCRYPTION_KEY } from "@/configs/env";
 
 // You'll need to install crypto-js: npm install crypto-js
 // And its types: npm install --save @types/crypto-js
 
 // Secret key for encryption (ideally store this in environment variables)
-const ENCRYPTION_KEY = import.meta.env.VITE_ENCRYPTION_KEY;
+const ENCRYPTION_KEY = VITE_ENCRYPTION_KEY;
 
 interface AuthState {
   userId: string | null;

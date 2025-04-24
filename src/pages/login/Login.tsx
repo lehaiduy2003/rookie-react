@@ -37,9 +37,14 @@ const Login = () => {
         console.log("Login successful:", response);
         const { accessToken, userDetails } = response;
         const id = userDetails.id.toString();
+        const role = userDetails.role;
         const authStore = useAuthStore.getState();
         authStore.login(id, userDetails, accessToken);
-        navigate("/");
+        if (role === "ADMIN") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
       })
       .catch((error) => {
         console.error("Login failed:", error);

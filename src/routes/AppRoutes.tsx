@@ -8,6 +8,7 @@ import PrivateRoute from "@/components/PrivateRoute";
 import AdminDashboard from "@/pages/adminDashboard/AdminDashboard";
 import MainLayout from "@/layouts/MainLayout";
 import AuthLayout from "@/layouts/AuthLayout";
+import { RoleEnumSchema } from "@/enums/Role";
 
 const AppRoutes = () => {
   return (
@@ -27,7 +28,7 @@ const AppRoutes = () => {
       <Route
         path="/admin"
         element={
-          <PrivateRoute>
+          <PrivateRoute userRole={RoleEnumSchema.Enum.ADMIN}>
             <AdminDashboard />
           </PrivateRoute>
         }

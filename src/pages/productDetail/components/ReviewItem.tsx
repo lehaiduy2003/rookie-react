@@ -1,7 +1,7 @@
 import Rating from "@/components/Rating";
 import UserAvatar from "@/components/UserAvatar";
 import { Rating as RatingType } from "@/types/Rating";
-import { distanceToNow } from "@/utils/dateFormat";
+import { distanceToNow } from "@/utils/dateUtil";
 import { getFullName } from "@/utils/userDataFormat";
 
 interface ReviewItemProps {

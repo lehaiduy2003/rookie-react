@@ -10,7 +10,7 @@ interface PrivateRouteProps {
 
 const PrivateRoute = ({ children, userRole }: PrivateRouteProps) => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const role = useAuthStore((state) => state.userDetail?.role);
+  const role = useAuthStore((state) => state.getRole());
 
   // If the user is not authenticated or not authorized, redirect to login page
   if (!isAuthenticated) {

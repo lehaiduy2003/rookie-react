@@ -74,7 +74,7 @@ const SortSelecting = () => {
           </SelectTrigger>
           <SelectContent>
             {sortOptions.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
+              <SelectItem id={`sort-${option.value}`} key={option.value} value={option.value}>
                 <div className="flex items-center">{option.label}</div>
               </SelectItem>
             ))}

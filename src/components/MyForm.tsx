@@ -24,30 +24,24 @@ interface FormFieldConfig {
 }
 
 interface MyFormProps<T extends FieldValues> {
-  label: string;
   form: UseFormReturn<T>;
   fields: FormFieldConfig[];
   onSubmit: (data: T) => void;
   loading: boolean;
-  submitLabel?: string;
   customButton?: JSX.Element;
   children?: React.ReactNode;
 }
 
 export const MyForm = <T extends FieldValues>({
-  label,
   form,
   fields,
   onSubmit,
   loading,
-  submitLabel = "Submit",
   customButton,
   children,
 }: MyFormProps<T>) => {
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-      {/* form label */}
-      <h2 className="text-2xl font-bold mb-6 text-center">{label}</h2>
+    <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           {/* form fields */}
@@ -61,6 +55,7 @@ export const MyForm = <T extends FieldValues>({
                   <FormLabel>{fieldConfig.label}</FormLabel>
                   <FormControl>
                     <Input
+                      id={fieldConfig.name}
                       type={fieldConfig.type}
                       placeholder={fieldConfig.placeholder}
                       {...field}
@@ -80,6 +75,7 @@ export const MyForm = <T extends FieldValues>({
               customButton
             ) : (
               <Button
+                id="btn-submit"
                 type="submit"
                 className={`w-full bg-mainOrange hover:bg-mainOrange/90 ${
                   loading ? "cursor-not-allowed opacity-50" : ""
@@ -87,7 +83,7 @@ export const MyForm = <T extends FieldValues>({
                 // Disable the button if loading, form is submitting, or form is invalid
                 disabled={loading || form.formState.isSubmitting || !form.formState.isValid}
               >
-                {loading ? <Spinning /> : submitLabel}
+                {loading ? <Spinning /> : "Submit"}
               </Button>
             )}
             {/* Optional children elements */}
@@ -96,6 +92,6 @@ export const MyForm = <T extends FieldValues>({
         </form>
       </Form>
       <Toaster />
-    </div>
+    </>
   );
 };

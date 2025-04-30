@@ -1,4 +1,5 @@
 import axios from "axios";
+import { VITE_API_URL } from "./env";
 
 interface refreshTokenResponse {
   accessToken: string;
@@ -13,7 +14,7 @@ interface refreshTokenResponse {
  */
 export default async function refreshToken(): Promise<refreshTokenResponse> {
   try {
-    const response = await axios.get("/v1/auth/refresh", {
+    const response = await axios.get(`${VITE_API_URL}/v1/auth/refresh`, {
       withCredentials: true, // fetch this api with cookies
     });
     return response.data;

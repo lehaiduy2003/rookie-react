@@ -1,5 +1,5 @@
 import { Category } from "@/types/Category";
-import { distanceToNow } from "@/utils/dateFormat";
+import { distanceToNow } from "@/utils/dateUtil";
 import { ArrowLeftRight, Calendar, Clock, Truck } from "lucide-react";
 import DetailAndSpec from "./DetailAndSpec";
 

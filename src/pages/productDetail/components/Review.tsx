@@ -81,6 +81,7 @@ const Review = ({ productId, userId }: { productId: string; userId: string }) =>
                   <div className="flex items-center gap-1">
                     {[1, 2, 3, 4, 5].map((score) => (
                       <Star
+                        id={`star-${score}`}
                         key={score}
                         className={`h-8 w-8 cursor-pointer transition-colors ${
                           score <= selectedRating
@@ -111,6 +112,7 @@ const Review = ({ productId, userId }: { productId: string; userId: string }) =>
                 <FormLabel className="font-medium">Your Review</FormLabel>
                 <FormControl>
                   <Textarea
+                    id="comment"
                     placeholder="Share your experience with this product..."
                     className="resize-none min-h-[120px]"
                     {...field}
@@ -128,6 +130,7 @@ const Review = ({ productId, userId }: { productId: string; userId: string }) =>
           {/* Submit Button */}
           <div className="flex justify-end">
             <Button
+              id="btn-submit-review"
               type="submit"
               className={loading ? "opacity-70 cursor-not-allowed" : ""}
               disabled={loading || !form.formState.isValid}

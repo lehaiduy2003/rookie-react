@@ -41,11 +41,11 @@ function addSubscriber(callback: (token: string) => void) {
 api.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
-    // Check if the error is due to a 403 Unauthorized response
+    // Check if the error is due to a 401 Unauthorized response
     const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
 
-    // If the error is a 403 and the request has not been retried yet
-    if (error.response?.status === 403 && !originalRequest._retry) {
+    // If the error is a 401 and the request has not been retried yet
+    if (error.response?.status === 401 && !originalRequest._retry) {
       // If the request has not been retried yet, set the _retry flag to true
       // and try to refresh the token
       originalRequest._retry = true;
@@ -58,16 +58,18 @@ api.interceptors.response.use(
           // Call the refresh token API (/auth/refresh)
           const data = await refreshToken();
 
+          console.log("Refresh token response:", data);
+
           // Update the token in the AuthStore
           authStore.login(authStore.userId!, authStore.userDetail!, data.accessToken);
 
-          isRefreshing = false;
           // Update the Authorization header with the new token
           onRefreshed(data.accessToken);
         } catch (err) {
-          isRefreshing = false;
           authStore.logout();
           return Promise.reject(err);
+        } finally {
+          isRefreshing = false;
         }
       }
 
@@ -79,6 +81,7 @@ api.interceptors.response.use(
         addSubscriber((token: string) => {
           if (originalRequest.headers) originalRequest.headers["Authorization"] = `Bearer ${token}`;
           resolve(api(originalRequest));
+          console.log("Retrying original request with new token:", originalRequest);
         });
       });
     }

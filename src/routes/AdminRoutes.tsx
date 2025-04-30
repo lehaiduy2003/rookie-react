@@ -1,5 +1,5 @@
 import PrivateRoute from "@/components/PrivateRoute";
-import AdminDashboard from "@/pages/adminDashboard/AdminDashboard";
+import AdminDashboard from "@/components/DataTable";
 import { Route } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 

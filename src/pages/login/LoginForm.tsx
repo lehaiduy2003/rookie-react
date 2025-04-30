@@ -2,18 +2,18 @@ import AuthService from "@/apis/AuthService";
 import Hdivider from "@/components/Hdivider";
 import { MyForm } from "@/components/MyForm";
 import useAuthStore from "@/stores/authStore";
-import { LoginForm, LoginFormSchema } from "@/types/LoginForm";
+import { Login, LoginSchema } from "@/types/Login";
 import { warningToast } from "@/utils/toastLogic";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const form = useForm<LoginForm>({
-    resolver: zodResolver(LoginFormSchema),
+  const form = useForm<Login>({
+    resolver: zodResolver(LoginSchema),
     mode: "onBlur",
     defaultValues: {
       email: "",
@@ -26,22 +26,18 @@ const Login = () => {
     { name: "password", label: "Password", type: "password", placeholder: "••••••••" },
   ];
 
-  const formLabel = "Login";
-  const submitLabel = "Login";
-
-  const onSubmit = (data: LoginForm) => {
-    const { email, password } = data;
+  const onSubmit = (data: Login) => {
     setLoading(true);
-    AuthService.login(email, password)
+    AuthService.login(data)
       .then((response) => {
-        console.log("Login successful:", response);
+        // console.log("Login successful:", response);
         const { accessToken, userDetails } = response;
         const id = userDetails.id.toString();
         const role = userDetails.role;
         const authStore = useAuthStore.getState();
         authStore.login(id, userDetails, accessToken);
         if (role === "ADMIN") {
-          navigate("/admin");
+          navigate("/admin/dashboard");
         } else {
           navigate("/");
         }
@@ -72,27 +68,23 @@ const Login = () => {
   };
 
   return (
-    <MyForm
-      label={formLabel}
-      form={form}
-      fields={formFields}
-      onSubmit={onSubmit}
-      loading={loading}
-      submitLabel={submitLabel}
-    >
-      <Hdivider message="Or" />
-      <div className="flex justify-center">
-        <Link to="/auth/register" className="text-blue-500 text-center">
-          Register
-        </Link>
-      </div>
-      <div className="flex justify-center">
-        <Link to="/auth/forgot-password" className="text-blue-500 text-center">
-          Forgot Password?
-        </Link>
-      </div>
-    </MyForm>
+    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+      <MyForm form={form} fields={formFields} onSubmit={onSubmit} loading={loading}>
+        <Hdivider message="Or" />
+        <div className="flex justify-center">
+          <Link to="/auth/register" className="text-blue-500 text-center">
+            Register
+          </Link>
+        </div>
+        <div className="flex justify-center">
+          <Link to="/auth/forgot-password" className="text-blue-500 text-center">
+            Forgot Password?
+          </Link>
+        </div>
+      </MyForm>
+    </div>
   );
 };
 
-export default Login;
+export default LoginForm;

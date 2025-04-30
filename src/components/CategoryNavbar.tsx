@@ -33,6 +33,7 @@ const CategoryNavbar = () => {
         {categories.map((category) => (
           <li key={category.id}>
             <a
+              id={`category-${category.id}`}
               href={`/products?category=${category.id}`}
               className="text-white text-sm font-medium hover:text-white/70 transition-colors whitespace-nowrap"
             >

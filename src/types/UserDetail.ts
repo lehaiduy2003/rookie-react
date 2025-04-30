@@ -1,5 +1,6 @@
 import * as z from "zod";
 import { UserSchema } from "./User";
+import { createPagingDataSchema, PagingData } from "./PagingData";
 
 export const UserDetailSchema = UserSchema.extend({
   email: z.string().email(),
@@ -16,3 +17,6 @@ export const UserDetailSchema = UserSchema.extend({
   updatedOn: z.coerce.date(),
 });
 export type UserDetail = z.infer<typeof UserDetailSchema>;
+// PagingData is a generic type that takes a schema as a parameter
+export const UserDetailPagingSchema = createPagingDataSchema(UserDetailSchema);
+export type UserDetailPaging = PagingData<z.infer<typeof UserDetailSchema>>;

@@ -1,34 +1,39 @@
-import { useState, FormEvent } from "react";
+import { FormEvent } from "react";
 import { cn } from "../lib/utils";
 import { Search } from "lucide-react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 interface SearchBarProps {
   className?: string;
+  placeholder?: string;
+  value: string;
+  setSearchQuery: (query: string) => void;
+  handleSearch: (e: FormEvent) => void;
 }
 
-const SearchBar = ({ className }: SearchBarProps) => {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearch = (e: FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      window.location.href = `/products?name=${searchQuery}`;
-    }
-  };
+const SearchBar = ({
+  className,
+  placeholder = "search...",
+  value,
+  setSearchQuery,
+  handleSearch,
+}: SearchBarProps) => {
+  // const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <form onSubmit={handleSearch} className={cn("relative flex w-full items-center", className)}>
       <div className="relative w-full">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
+          id="input-search"
           type="search"
-          placeholder="Search products..."
-          value={searchQuery}
+          placeholder={placeholder}
+          value={value}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full pl-9 pr-[4.5rem]"
         />
         <Button
+          id="btn-search"
           type="submit"
           variant="ghost"
           size="sm"

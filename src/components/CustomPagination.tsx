@@ -23,7 +23,7 @@ interface PaginationItemProps {
 const ActiveItem = ({ page }: PaginationItemProps) => {
   return (
     <PaginationItem className="pointer-events-none">
-      <PaginationLink isActive className="text-white bg-[#FB6E52]">
+      <PaginationLink id={`current-page`} isActive className="text-white bg-[#FB6E52]">
         {page}
       </PaginationLink>
     </PaginationItem>
@@ -34,6 +34,7 @@ const UnActiveItem = ({ page, onPageChange }: PaginationItemProps) => {
   return (
     <PaginationItem>
       <PaginationLink
+        id={`page-${page}`}
         className="text-[#FB6E52] hover:bg-[#FB6E52]/10 hover:text-[#FB6E52]"
         href={`page=${page}`}
         onClick={(e) => {
@@ -124,6 +125,7 @@ const CustomPagination = ({ totalPages, currentPage, onPageChange }: CustomPagin
     <Pagination>
       <PaginationContent>
         <PaginationPrevious
+          id="previous-page"
           href="#"
           onClick={(e) => {
             e.preventDefault();
@@ -145,6 +147,7 @@ const CustomPagination = ({ totalPages, currentPage, onPageChange }: CustomPagin
         />
 
         <PaginationNext
+          id="next-page"
           href="#"
           onClick={(e) => {
             e.preventDefault();

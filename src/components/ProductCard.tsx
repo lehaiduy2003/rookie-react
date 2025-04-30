@@ -13,6 +13,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     <Card className="w-[300px] group relative overflow-hidden py-0">
       <figure className="group-hover:opacity-90">
         <Button
+          id="btn-favorite"
           variant="ghost"
           size="icon"
           className="bg-white/70 absolute top-3 end-3 rounded-full dark:text-black"

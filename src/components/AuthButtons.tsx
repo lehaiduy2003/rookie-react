@@ -8,11 +8,12 @@ const AuthButtons = () => {
     <div className="flex items-center space-x-4">
       {isAuthenticated ? (
         <>
-          <Button variant="outline" className="w-32">
+          <Button id="btn-profile" variant="outline" className="w-32">
             <User className="mr-2" />
             Profile
           </Button>
           <Button
+            id="btn-logout"
             variant="outline"
             className="w-32"
             onClick={() => {
@@ -27,6 +28,7 @@ const AuthButtons = () => {
       ) : (
         <>
           <Button
+            id="btn-login"
             variant="outline"
             className="w-32"
             onClick={() => (window.location.href = "/auth/login")}
@@ -34,6 +36,7 @@ const AuthButtons = () => {
             Login
           </Button>
           <Button
+            id="btn-register"
             variant="outline"
             className="w-32 bg-primary text-white"
             onClick={() => (window.location.href = "/auth/register")}

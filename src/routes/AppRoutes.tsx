@@ -36,15 +36,6 @@ const AppRoutes = () => {
       >
         <Route path="dashboard" element={<AdminDashboard />} />
       </Route>
-      {/* Admin routes */}
-      {/* <Route
-        path="/admin"
-        element={
-          <PrivateRoute userRole={RoleEnumSchema.Enum.ADMIN}>
-            <AdminDashboard />
-          </PrivateRoute>
-        }
-      /> */}
     </Routes>
   );
 };

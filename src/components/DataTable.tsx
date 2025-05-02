@@ -1,7 +1,4 @@
-"use client";
-
 import { flexRender } from "@tanstack/react-table";
-
 import {
   Table,
   TableBody,
@@ -13,15 +10,16 @@ import {
 import { Input } from "./ui/input";
 import DataTablePagination from "./DataTablePagination";
 import DataTableViewOptions from "./DataTableViewOptions";
-import useDataTable, { useDataTableProps } from "./hooks/useDataTable";
-import { useEffect } from "react";
+import { JSX, useEffect } from "react";
 import { Skeleton } from "./ui/skeleton";
+import useDataTable, { useDataTableProps } from "@/hooks/useDataTable";
 
 interface DataTableProps<TData, TValue> extends useDataTableProps<TData, TValue> {
   loading: boolean;
   search: string;
   setSearch: (search: string) => void;
   setPageSize: (pageSize: number) => void;
+  addButton?: JSX.Element;
 }
 
 export default function DataTable<TData, TValue>({
@@ -34,6 +32,7 @@ export default function DataTable<TData, TValue>({
   total,
   search,
   setSearch,
+  addButton,
   loading,
 }: DataTableProps<TData, TValue>) {
   const table = useDataTable({
@@ -53,12 +52,16 @@ export default function DataTable<TData, TValue>({
     <div className="px-10 py-2">
       <div className="flex items-center py-4">
         <Input
+          id="search"
           placeholder="Search..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="max-w-sm"
         />
-        <DataTableViewOptions table={table} />
+        <div className="ml-auto flex items-center gap-2">
+          {addButton}
+          <DataTableViewOptions table={table} />
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>

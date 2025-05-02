@@ -14,6 +14,13 @@ import Spinning from "./Spinning";
 import { Input } from "./ui/input";
 import { Toaster } from "sonner";
 import { JSX } from "react";
+import { Switch } from "./ui/switch";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+
+interface FormFieldOption {
+  value: string;
+  label: string;
+}
 
 interface FormFieldConfig {
   name: string;
@@ -21,6 +28,7 @@ interface FormFieldConfig {
   type: string;
   placeholder: string;
   description?: string;
+  options?: FormFieldOption[];
 }
 
 interface MyFormProps<T extends FieldValues> {
@@ -54,12 +62,42 @@ export const MyForm = <T extends FieldValues>({
                 <FormItem>
                   <FormLabel>{fieldConfig.label}</FormLabel>
                   <FormControl>
-                    <Input
-                      id={fieldConfig.name}
-                      type={fieldConfig.type}
-                      placeholder={fieldConfig.placeholder}
-                      {...field}
-                    />
+                    {/* Render different input types based on fieldConfig.type */}
+                    {fieldConfig.type === "checkbox" ? (
+                      // render checkbox if fieldConfig.type is checkbox
+                      <Switch
+                        id={fieldConfig.name}
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        className="data-[state=checked]:bg-green-500"
+                      />
+                    ) : fieldConfig.type === "select" && fieldConfig.options ? (
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        value={field.value}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder={fieldConfig.placeholder} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {fieldConfig.options.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    ) : (
+                      <Input
+                        id={fieldConfig.name}
+                        type={fieldConfig.type}
+                        placeholder={fieldConfig.placeholder}
+                        {...field}
+                        value={field.value}
+                        onChange={(e) => field.onChange(e)}
+                      />
+                    )}
                   </FormControl>
                   {fieldConfig.description && (
                     <FormDescription>{fieldConfig.description}</FormDescription>

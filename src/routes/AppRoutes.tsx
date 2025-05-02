@@ -8,8 +8,11 @@ import PrivateRoute from "@/components/PrivateRoute";
 import MainLayout from "@/layouts/MainLayout";
 import AuthLayout from "@/layouts/AuthLayout";
 import { RoleEnumSchema } from "@/enums/Role";
-import AdminDashboard from "@/pages/adminDashboard/AdminDashBoard";
 import AdminLayout from "@/layouts/AdminLayout";
+import CustomerTable from "@/pages/adminDashboard/CustomerTable";
+import ProductTable from "@/pages/adminDashboard/ProductTable";
+import CategoryTable from "@/pages/adminDashboard/CategoryTable";
+import ProductCreating from "@/pages/adminDashboard/ProductCreating";
 
 const AppRoutes = () => {
   return (
@@ -34,7 +37,10 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       >
-        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="customers" element={<CustomerTable />} />
+        <Route path="products" element={<ProductTable />} />
+        <Route path="products/creating" element={<ProductCreating />} />
+        <Route path="categories" element={<CategoryTable />} />
       </Route>
     </Routes>
   );

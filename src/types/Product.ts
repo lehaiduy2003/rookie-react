@@ -14,6 +14,7 @@ export const ProductSchema = z.object({
       ),
     z.null(),
   ]), // default image url and can be null
+  featured: z.boolean(),
   isActive: z.boolean(),
   avgRating: z.number().nonnegative().min(0).max(5),
   ratingCount: z.number().nonnegative(),

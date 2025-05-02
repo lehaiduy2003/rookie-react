@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import UserService from "@/apis/UserService";
-import { useDebounce } from "@/components/hooks/useDebounce";
-import { UserDetail } from "@/types/UserDetail";
+import { useDebounce } from "@/hooks/useDebounce";
+import ProductService from "@/apis/ProductService";
+import { Product } from "@/types/Product";
 
-export function useCustomers() {
-  const [customers, setCustomers] = useState<UserDetail[]>([]);
+export function useProducts() {
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1); // Default page number
   const [pageSize, setPageSize] = useState(10); // Default page size
@@ -14,27 +14,27 @@ export function useCustomers() {
 
   // This effect is used debouncing already via the useDebounce hook in search input
   useEffect(() => {
-    const fetchCustomers = async () => {
+    const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await UserService.getUsers({
+        const response = await ProductService.getProducts({
           pageNo: String(page - 1), // page number start from 0 from server
           pageSize: String(pageSize),
-          ...(debouncedSearch && { email: debouncedSearch }),
+          ...(debouncedSearch && { name: debouncedSearch }),
         });
-        setCustomers(response.content);
+        setProducts(response.content);
         setTotal(response.totalElements); // backend returns total elements
       } catch (error) {
-        console.error("Failed to fetch customers:", error);
+        console.error("Failed to fetch products:", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchCustomers();
+    fetchProducts();
   }, [page, pageSize, debouncedSearch]);
 
   return {
-    customers,
+    products,
     loading,
     page,
     setPage,

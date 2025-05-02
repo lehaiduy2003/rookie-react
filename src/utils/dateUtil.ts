@@ -24,13 +24,3 @@ export const distanceToNow = (date: Date): string => {
     return `${diffInDays} days ago`;
   }
 };
-
-/**
- * For date picker configuration using Pikaday
- * @see https://pikaday.com/
- */
-export const datePickerConfig: Pikaday.PikadayOptions = {
-  minDate: new Date(1900, 0, 1), // Minimum date is set to 1900-01-01
-  maxDate: new Date(), // Maximum date is set to the current date
-  yearRange: [1900, new Date().getFullYear()],
-};

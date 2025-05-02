@@ -1,6 +1,6 @@
 import DataTable from "@/components/DataTable";
-import { CustomerColumns } from "./CustomerColumns";
-import { useCustomers } from "../hooks/useCustomers";
+import { CustomerColumns } from "./components/customers/CustomerColumns";
+import { useCustomers } from "./hooks/useCustomers";
 
 const CustomerTable = () => {
   const { customers, loading, page, setPage, pageSize, setPageSize, search, setSearch, total } =

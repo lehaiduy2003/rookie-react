@@ -13,37 +13,13 @@ import { Trash } from "lucide-react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import AlertModal from "@/components/AlertModal";
-import { Switch } from "@/components/ui/switch";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { format } from "date-fns";
 import { UserDetail } from "@/types/UserDetail";
 import { MyForm } from "@/components/MyForm";
 import { CustomerForm, CustomerFormSchema } from "@/types/UpdatingCustomer";
-import { errorToast, successToast } from "@/utils/toastLogic";
-import UserService from "@/apis/UserService";
-
-async function deleteCustomerById(id: string) {
-  console.log("Deleting customer", id);
-  try {
-    await UserService.deleteUserById(id);
-    successToast("Customer deleted successfully");
-  } catch (error) {
-    console.error("Failed to delete customer:", error);
-    errorToast("Failed to delete customer");
-  }
-}
-
-async function updateCustomer(id: string, customer: CustomerForm) {
-  console.log("updating customer");
-  try {
-    await UserService.updateById(id, customer);
-    successToast("Customer updated successfully");
-  } catch (error) {
-    console.error("An error occurs when updating customer: ", error);
-    errorToast("Customer Updating failed");
-  }
-}
+import { distanceToNow } from "@/utils/dateUtil";
+import { deleteCustomerById, updateCustomer } from "../../utils/customerData";
 
 interface CustomerDetailsProps {
   customer: UserDetail | null;
@@ -133,6 +109,12 @@ const CustomerDetails: React.FC<CustomerDetailsProps> = ({ customer, isOpen, onO
       type: "text",
       placeholder: "Address",
     },
+    {
+      name: "isActive",
+      label: "Active",
+      type: "checkbox",
+      placeholder: "Is Active",
+    },
   ];
 
   return (
@@ -202,13 +184,13 @@ const CustomerDetails: React.FC<CustomerDetailsProps> = ({ customer, isOpen, onO
                     <div>
                       <h4 className="font-medium text-muted-foreground">Created On</h4>
                       <p>
-                        {customer.createdOn ? format(new Date(customer.createdOn), "PPP") : "—"}
+                        {customer.createdOn ? distanceToNow(new Date(customer.createdOn)) : "—"}
                       </p>
                     </div>
                     <div>
                       <h4 className="font-medium text-muted-foreground">Last Updated</h4>
                       <p>
-                        {customer.updatedOn ? format(new Date(customer.updatedOn), "PPP") : "—"}
+                        {customer.updatedOn ? distanceToNow(new Date(customer.updatedOn)) : "—"}
                       </p>
                     </div>
                   </div>
@@ -224,24 +206,6 @@ const CustomerDetails: React.FC<CustomerDetailsProps> = ({ customer, isOpen, onO
                     loading={isUpdating}
                     customButton={
                       <div className="flex flex-col gap-3 pt-4">
-                        {/* Active Status Switch (outside of form fields) */}
-                        <div className="flex flex-row items-center justify-between rounded-lg border p-4 mb-4">
-                          <div className="space-y-0.5">
-                            <h3 className="text-base font-medium">Active Status</h3>
-                            <p className="text-sm text-muted-foreground">
-                              Determine if this customer account is active
-                            </p>
-                          </div>
-                          <Switch
-                            checked={customer.isActive}
-                            onCheckedChange={(checked) => {
-                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                              form.setValue("isActive" as any, checked);
-                            }}
-                            className="data-[state=checked]:bg-green-500"
-                          />
-                        </div>
-
                         {/* Buttons */}
                         <div className="flex gap-2 pt-4">
                           <Button

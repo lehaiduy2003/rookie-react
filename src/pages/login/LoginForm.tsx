@@ -37,7 +37,7 @@ const LoginForm = () => {
         const authStore = useAuthStore.getState();
         authStore.login(id, userDetails, accessToken);
         if (role === "ADMIN") {
-          navigate("/admin/dashboard");
+          navigate("/admin/customers");
         } else {
           navigate("/");
         }

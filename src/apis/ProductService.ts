@@ -64,7 +64,7 @@ class ProductService extends BaseService {
    * @param id The ID of the product to delete.
    * @returns {Promise<void>} A promise that resolves when the product is deleted.
    */
-  async deleteProductById(id: number): Promise<void> {
+  async deleteProductById(id: string): Promise<void> {
     await this.http.delete(`/v1/products/${id}`);
   }
 

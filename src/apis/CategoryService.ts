@@ -96,6 +96,11 @@ class CategoryService extends BaseService {
     const response = await this.http.get<Category[]>(`/v1/categories?parentId=${parentId}`);
     return response.data;
   }
+
+  async getAllCategories(): Promise<Category[]> {
+    const response = await this.http.get<Category[]>("/v1/categories/all");
+    return response.data;
+  }
 }
 
 export default new CategoryService();

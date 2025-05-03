@@ -1,6 +1,6 @@
 import BaseService from "./BaseService";
 import { UserDetailPaging } from "@/types/UserDetail";
-import { CustomerForm } from "@/types/UpdatingCustomer";
+import { CustomerForm } from "@/types/CustomerFormValues";
 /**
  * UserService class handles authentication-related API calls.
  * It extends the BaseService class to utilize the AxiosInstance for making HTTP requests.

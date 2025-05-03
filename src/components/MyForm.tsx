@@ -22,7 +22,7 @@ interface FormFieldOption {
   label: string;
 }
 
-interface FormFieldConfig {
+export interface FormFieldConfig {
   name: string;
   label: string;
   type: string;

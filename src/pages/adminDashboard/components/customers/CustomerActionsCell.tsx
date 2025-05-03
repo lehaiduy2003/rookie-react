@@ -14,20 +14,8 @@ import AlertModal from "@/components/AlertModal";
 import { useState } from "react";
 import CustomerDetails from "./CustomerDetails";
 import { UserDetail } from "@/types/UserDetail";
-import UserService from "@/apis/UserService";
-import { errorToast, successToast } from "@/utils/toastLogic";
 import { Toaster } from "sonner";
-
-async function deleteCustomerById(id: string) {
-  console.log("Deleting customer", id);
-  try {
-    await UserService.deleteUserById(id);
-    successToast("Customer deleted successfully");
-  } catch (error) {
-    console.error("Failed to delete customer:", error);
-    errorToast("Failed to delete customer");
-  }
-}
+import { useCustomers } from "../../hooks/useCustomers";
 
 interface CustomerActionsCellProps {
   customer: UserDetail;
@@ -36,6 +24,7 @@ interface CustomerActionsCellProps {
 export default function CustomerActionsCell({ customer }: CustomerActionsCellProps) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showDetailsDrawer, setShowDetailsDrawer] = useState(false);
+  const { deleteCustomer } = useCustomers();
   return (
     <>
       <DropdownMenu>
@@ -73,7 +62,7 @@ export default function CustomerActionsCell({ customer }: CustomerActionsCellPro
           title="Delete customer?"
           description={`Are you sure you want to delete ${customer.email}?`}
           onConfirm={async () => {
-            await deleteCustomerById(customer.id.toString());
+            await deleteCustomer(customer.id);
             setShowDeleteModal(false);
           }}
           trigger={<span style={{ display: "none" }} />}

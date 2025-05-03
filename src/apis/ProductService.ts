@@ -1,6 +1,7 @@
 import { ProductPaging } from "@/types/Product";
 import BaseService from "./BaseService";
 import { ProductDetail } from "@/types/ProductDetail";
+import { ProductForm } from "@/types/ProductFormValues";
 
 /**
  * ProductService class handles product-related API calls.
@@ -31,7 +32,7 @@ class ProductService extends BaseService {
    * @param id The ID of the product to fetch.
    * @returns {Promise<ProductDetail>} A promise that resolves to the product details.
    */
-  async getProduct(id: string): Promise<ProductDetail> {
+  async getProduct(id: string | number): Promise<ProductDetail> {
     const response = await this.http.get<ProductDetail>(`/v1/products/${id}`);
     return response.data;
   }
@@ -42,7 +43,7 @@ class ProductService extends BaseService {
    * @param data The data to create a new product.
    * @returns {Promise<ProductDetail>} A promise that resolves to the created product details.
    */
-  async createProduct(data: object): Promise<ProductDetail> {
+  async createProduct(data: object | ProductForm): Promise<ProductDetail> {
     const response = await this.http.post<ProductDetail>("/v1/products", data);
     return response.data;
   }
@@ -54,7 +55,7 @@ class ProductService extends BaseService {
    * @param data The data to update the product.
    * @returns {Promise<ProductDetail>} A promise that resolves to the updated product details.
    */
-  async updateProductById(id: number, data: object): Promise<ProductDetail> {
+  async updateProductById(id: string | number, data: object | ProductForm): Promise<ProductDetail> {
     const response = await this.http.put<ProductDetail>(`/v1/products/${id}`, data);
     return response.data;
   }
@@ -64,7 +65,7 @@ class ProductService extends BaseService {
    * @param id The ID of the product to delete.
    * @returns {Promise<void>} A promise that resolves when the product is deleted.
    */
-  async deleteProductById(id: string): Promise<void> {
+  async deleteProductById(id: string | number): Promise<void> {
     await this.http.delete(`/v1/products/${id}`);
   }
 
@@ -74,7 +75,10 @@ class ProductService extends BaseService {
    * @param featured true or false
    * @returns {Promise<ProductDetail>} A promise that resolves to the updated product details.
    */
-  async updateFeaturedProduct(id: number, featured: "true" | "false"): Promise<ProductDetail> {
+  async updateFeaturedProduct(
+    id: string | number,
+    featured: "true" | "false"
+  ): Promise<ProductDetail> {
     const response = await this.http.put<ProductDetail>(`/v1/products/${id}/featured=${featured}`);
     return response.data;
   }

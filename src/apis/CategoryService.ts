@@ -97,8 +97,14 @@ class CategoryService extends BaseService {
     return response.data;
   }
 
-  async getAllCategories(): Promise<Category[]> {
-    const response = await this.http.get<Category[]>("/v1/categories/all");
+  async getAllCategories(params?: Record<string, string>): Promise<Category[]> {
+    console.log("Fetching all categories with params:", params);
+    if (params) {
+      const queryString = super.buildParams(params);
+      const response = await this.http.get<Category[]>(`/v1/categories?${queryString}`);
+      return response.data;
+    }
+    const response = await this.http.get<Category[]>("/v1/categories");
     return response.data;
   }
 }

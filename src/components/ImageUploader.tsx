@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Upload, X, Image as ImageIcon } from "lucide-react";
 
-interface ProductImageUploaderProps {
+interface ImageUploaderProps {
   imageUrl: string;
   onImageUpload: (url: string) => void;
 }
@@ -14,7 +14,7 @@ interface ProductImageUploaderProps {
  * Handles image uploads for products with preview, drag-and-drop functionality,
  * and validation for file types and sizes.
  */
-const ProductImageUploader = ({ imageUrl, onImageUpload }: ProductImageUploaderProps) => {
+const ImageUploader = ({ imageUrl, onImageUpload }: ImageUploaderProps) => {
   // Reference to the file input element
   const fileInputRef = useRef<HTMLInputElement>(null);
   // State for drag and drop UI feedback
@@ -159,7 +159,7 @@ const ProductImageUploader = ({ imageUrl, onImageUpload }: ProductImageUploaderP
           onDrop={handleDrop}
         >
           <ImageIcon className="h-12 w-12 text-gray-400 mb-4" />
-          <p className="text-sm text-gray-600 font-medium">Drag and drop your product image here</p>
+          <p className="text-sm text-gray-600 font-medium">Drag and drop your image here</p>
           <p className="text-xs text-gray-500 mt-1">or click to browse files</p>
           <p className="text-xs text-gray-400 mt-4">Supports: JPG, PNG, WEBP (max 5MB)</p>
         </div>
@@ -185,4 +185,4 @@ const ProductImageUploader = ({ imageUrl, onImageUpload }: ProductImageUploaderP
   );
 };
 
-export default ProductImageUploader;
+export default ImageUploader;

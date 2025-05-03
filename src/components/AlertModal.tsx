@@ -1,5 +1,3 @@
-"use client";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -56,7 +54,12 @@ export default function AlertModal({
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel onClick={handleCancel}>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirm}>Continue</AlertDialogAction>
+            <AlertDialogAction
+              onClick={handleConfirm}
+              className="bg-red-50 text-red-500 border-red-500 hover:bg-red-100"
+            >
+              Continue
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

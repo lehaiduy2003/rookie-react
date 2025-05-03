@@ -1,7 +1,7 @@
 import { useProducts } from "./hooks/useProducts";
 import DataTable from "@/components/DataTable";
 import { ProductColumns } from "./components/products/ProductColumns";
-import AddButton from "./components/AddButton";
+import AddButton from "./components/products/AddButton";
 
 const ProductTable = () => {
   const { products, loading, page, setPage, pageSize, setPageSize, search, setSearch, total } =

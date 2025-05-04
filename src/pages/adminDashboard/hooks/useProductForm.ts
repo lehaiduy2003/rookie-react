@@ -83,12 +83,6 @@ const useProductForm = (
       ],
     },
     {
-      name: "imageUrl",
-      label: "Image URL",
-      type: "text",
-      placeholder: "Product image URL",
-    },
-    {
       name: "featured",
       label: "Featured",
       type: "checkbox",

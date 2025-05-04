@@ -35,7 +35,7 @@ class UserService extends BaseService {
       const response = await this.http.delete(`/v1/users/${id}`);
       return response.data;
     } catch (error) {
-      console.error("Registration error:", error);
+      console.error("Deleting error:", error);
       throw error;
     }
   }
@@ -45,7 +45,7 @@ class UserService extends BaseService {
       const response = await this.http.put(`/v1/users/${id}/by-admin`, user);
       return response.data;
     } catch (error) {
-      console.error("Registration error:", error);
+      console.error("Updating error:", error);
       throw error;
     }
   }

@@ -1,5 +1,5 @@
 import BaseService from "./BaseService";
-import { UserDetailPaging } from "@/types/UserDetail";
+import { UserDetail, UserDetailPaging } from "@/types/UserDetail";
 import { CustomerForm } from "@/types/CustomerFormValues";
 /**
  * UserService class handles authentication-related API calls.
@@ -26,6 +26,21 @@ class UserService extends BaseService {
   }
 
   /**
+   * Get the user by id from the system.
+   * @param id the id of the user to be fetched
+   * @returns {Promise<UserDetail>} A promise that resolves to the created user object.
+   */
+  async getUserById(id: string): Promise<UserDetail> {
+    try {
+      const response = await this.http.get<UserDetail>(`/v1/users/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error("Fetching error:", error);
+      throw error;
+    }
+  }
+
+  /**
    * delete a user from the system.
    * @param id the id of the user to be fetched
    * @returns {Promise<void>} a promise that resolves to deleted user object.
@@ -35,7 +50,7 @@ class UserService extends BaseService {
       const response = await this.http.delete(`/v1/users/${id}`);
       return response.data;
     } catch (error) {
-      console.error("Registration error:", error);
+      console.error("Deleting error:", error);
       throw error;
     }
   }
@@ -45,7 +60,7 @@ class UserService extends BaseService {
       const response = await this.http.put(`/v1/users/${id}/by-admin`, user);
       return response.data;
     } catch (error) {
-      console.error("Registration error:", error);
+      console.error("Updating error:", error);
       throw error;
     }
   }

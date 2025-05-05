@@ -1,4 +1,4 @@
-import Rating from "@/components/Rating";
+import RatingStar from "@/components/RatingStar";
 import { Product } from "@/types/Product";
 import { Link } from "react-router-dom";
 
@@ -31,7 +31,7 @@ const ProductListItem = ({ product }: ProductListItemProps) => {
           <div className="text-lg font-semibold">${product.price.toFixed(2)}</div>
         </div>
         {/* Ratings */}
-        <Rating avgRating={product.avgRating} ratingCount={product.ratingCount} />
+        <RatingStar avgRating={product.avgRating} ratingCount={product.ratingCount} />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Upload, X, Image as ImageIcon } from "lucide-react";
+import { X, Image as ImageIcon } from "lucide-react";
 
 interface ImageUploaderProps {
   imageUrl: string;
@@ -167,20 +167,6 @@ const ImageUploader = ({ imageUrl, onImageUpload }: ImageUploaderProps) => {
 
       {/* Error message display */}
       {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
-
-      {/* Upload button for explicit file selection */}
-      {!imageUrl && (
-        <Button
-          id="upload-button"
-          type="button"
-          variant="outline"
-          className="w-full border-gray-300"
-          onClick={handleUploadClick}
-        >
-          <Upload className="h-4 w-4 mr-2" />
-          Select Image
-        </Button>
-      )}
     </div>
   );
 };

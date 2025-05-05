@@ -14,7 +14,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const form = useForm<Login>({
     resolver: zodResolver(LoginSchema),
-    mode: "onBlur",
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",

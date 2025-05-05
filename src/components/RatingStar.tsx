@@ -1,6 +1,6 @@
 import { Star, StarHalf } from "lucide-react";
 
-interface RatingProps {
+interface RatingStarProps {
   avgRating: number | null;
   ratingCount?: number;
 }
@@ -53,7 +53,7 @@ const renderStars = (avgRating: number) => {
  * Rating component that displays stars based on average rating
  * Shows either star rating + review count or "No ratings yet" message
  */
-const Rating = ({ avgRating, ratingCount }: RatingProps) => {
+const RatingStar = ({ avgRating, ratingCount }: RatingStarProps) => {
   return (
     <div className="text-sm text-muted-foreground mt-1">
       {avgRating != null && avgRating > 0 ? (
@@ -74,4 +74,4 @@ const Rating = ({ avgRating, ratingCount }: RatingProps) => {
   );
 };
 
-export default Rating;
+export default RatingStar;

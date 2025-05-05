@@ -1,51 +1,18 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { ProductDetail } from "@/types/ProductDetail";
 import { Button } from "@/components/ui/button";
-import Rating from "@/components/Rating";
+import RatingStar from "@/components/RatingStar";
 import { ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
-import ProductService from "@/apis/ProductService";
 import { Skeleton } from "@/components/ui/skeleton";
 import ProductImage from "./components/ProductImage";
 import ProductMetaData from "./components/ProductMetaData";
 import ActionButtons from "./components/ActionButtons";
-import OwnerSection from "./components/OwnerSection";
-import ReviewList from "./components/ReviewList";
+import OwnerSection from "./components/owner/OwnerSection";
+import RatingList from "./components/rating/RatingList";
+import useProductDetails from "./hooks/useProductDetails";
 
 const ProductDetails = () => {
-  const { id } = useParams<{ id: string }>();
-  const [product, setProduct] = useState<ProductDetail | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [quantity, setQuantity] = useState(1);
-
-  // Fetch product details
-  useEffect(() => {
-    if (!id) return;
-    setIsLoading(true);
-    ProductService.getProduct(id)
-      .then((data) => {
-        setProduct(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching product:", error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [id]);
-
-  // Handle quantity changes
-  const decrementQuantity = () => {
-    if (quantity > 1) setQuantity(quantity - 1);
-  };
-
-  const incrementQuantity = () => {
-    // Don't allow adding more than available stock
-    if (product && quantity < product.quantity) {
-      setQuantity(quantity + 1);
-    }
-  };
+  const { id, product, isLoading, quantity, decrementQuantity, incrementQuantity } =
+    useProductDetails();
 
   // Loading skeleton
   if (isLoading) {
@@ -120,7 +87,7 @@ const ProductDetails = () => {
 
           {/* Rating */}
           <div className="mt-2">
-            <Rating avgRating={product.avgRating} ratingCount={product.ratingCount} />
+            <RatingStar avgRating={product.avgRating} ratingCount={product.ratingCount} />
           </div>
 
           {/* Price */}
@@ -164,7 +131,7 @@ const ProductDetails = () => {
 
       {/* Additional product information tabs */}
       <div className="mt-12">
-        <ReviewList ratings={product.ratings} productId={id} />
+        <RatingList ratings={product.ratings} productId={id} />
       </div>
     </div>
   );

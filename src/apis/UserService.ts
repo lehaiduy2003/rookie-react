@@ -1,5 +1,5 @@
 import BaseService from "./BaseService";
-import { UserDetailPaging } from "@/types/UserDetail";
+import { UserDetail, UserDetailPaging } from "@/types/UserDetail";
 import { CustomerForm } from "@/types/CustomerFormValues";
 /**
  * UserService class handles authentication-related API calls.
@@ -23,6 +23,21 @@ class UserService extends BaseService {
     // the backend handled the default value for pageNo, pageSize, sortBy, and sortDir,...
     const response = await this.http.get<UserDetailPaging>("/v1/users");
     return response.data;
+  }
+
+  /**
+   * Get the user by id from the system.
+   * @param id the id of the user to be fetched
+   * @returns {Promise<UserDetail>} A promise that resolves to the created user object.
+   */
+  async getUserById(id: string): Promise<UserDetail> {
+    try {
+      const response = await this.http.get<UserDetail>(`/v1/users/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error("Fetching error:", error);
+      throw error;
+    }
   }
 
   /**

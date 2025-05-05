@@ -22,12 +22,6 @@ class AuthService extends BaseService {
         },
         { withCredentials: true }
       );
-      // const refreshToken = response.data.refreshToken;
-
-      // if (refreshToken) {
-      //   console.log("Refresh token set in cookie:", refreshToken);
-      //   this.setRefreshTokenCookie(refreshToken);
-      // }
       return response.data;
     } catch (error) {
       console.error("Registration error:", error);

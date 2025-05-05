@@ -1,14 +1,14 @@
 import { Rating } from "@/types/Rating";
-import ReviewItem from "./ReviewItem";
+import RatingItem from "./RatingItem";
 import useAuthStore from "@/stores/authStore";
-import Review from "./Review";
+import RatingSection from "./RatingSection";
 
-interface ReviewListProps {
+interface RatingListProps {
   productId: string;
   ratings: Rating[];
 }
 
-const ReviewList = ({ ratings, productId }: ReviewListProps) => {
+const RatingList = ({ ratings, productId }: RatingListProps) => {
   const userDetail = useAuthStore((state) => state.userDetail);
   const id = userDetail?.id;
   const role = userDetail?.role;
@@ -26,7 +26,7 @@ const ReviewList = ({ ratings, productId }: ReviewListProps) => {
 
       {/* Review Form Section */}
       {canReview ? (
-        <Review productId={productId} userId={id?.toString()} />
+        <RatingSection productId={productId} userId={id?.toString()} />
       ) : (
         <div className="text-center py-4 bg-gray-50 rounded-lg mb-6">
           <p className="text-gray-500">Please log in as a customer to leave a review.</p>
@@ -39,7 +39,7 @@ const ReviewList = ({ ratings, productId }: ReviewListProps) => {
 
         <div className="space-y-4">
           {ratings && ratings.length > 0 ? (
-            ratings.map((rating, index) => <ReviewItem key={index} rating={rating} />)
+            ratings.map((rating, index) => <RatingItem key={index} rating={rating} />)
           ) : (
             <div className="text-center py-8">
               <p className="text-gray-500">No reviews yet.</p>
@@ -52,4 +52,4 @@ const ReviewList = ({ ratings, productId }: ReviewListProps) => {
   );
 };
 
-export default ReviewList;
+export default RatingList;

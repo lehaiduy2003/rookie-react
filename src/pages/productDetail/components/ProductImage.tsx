@@ -5,7 +5,7 @@ interface ProductImageProps {
 
 const ProductImage = ({ imageUrl, name }: ProductImageProps) => {
   return (
-    <div className="border rounded-lg overflow-hidden bg-white mb-4">
+    <div className="overflow-hidden bg-white mb-4">
       <img
         src={imageUrl || "https://placehold.co/600x600?text=No+Image"}
         alt={name}

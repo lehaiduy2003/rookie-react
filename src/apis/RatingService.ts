@@ -1,5 +1,6 @@
 import { Rating } from "@/types/Rating";
 import BaseService from "./BaseService";
+import { RatingForm } from "@/types/ReviewForm";
 /**
  * AuthService class handles authentication-related API calls.
  * It extends the BaseService class to utilize the AxiosInstance for making HTTP requests.
@@ -15,13 +16,9 @@ class RatingService extends BaseService {
    * @param customerId id of the customer
    * @returns {Promise<Rating>} A promise that resolves to the created rating object.
    */
-  async createRating(
-    comment: string,
-    score: number,
-    productId: string,
-    customerId: string
-  ): Promise<Rating> {
+  async createRating(data: RatingForm): Promise<Rating> {
     try {
+      const { comment, score, productId, customerId } = data;
       const response = await this.http.post("/v1/ratings", {
         comment,
         score,

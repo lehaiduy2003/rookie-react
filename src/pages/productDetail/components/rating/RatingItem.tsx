@@ -1,4 +1,4 @@
-import Rating from "@/components/Rating";
+import RatingStar from "@/components/RatingStar";
 import UserAvatar from "@/components/UserAvatar";
 import { Rating as RatingType } from "@/types/Rating";
 import { distanceToNow } from "@/utils/dateUtil";
@@ -8,7 +8,7 @@ interface ReviewItemProps {
   rating: RatingType;
 }
 
-const ReviewItem = ({ rating }: ReviewItemProps) => {
+const RatingItem = ({ rating }: ReviewItemProps) => {
   const imageUrl = rating.customer.avatar;
   const firstName = rating.customer.firstName;
   const lastName = rating.customer.lastName;
@@ -25,7 +25,7 @@ const ReviewItem = ({ rating }: ReviewItemProps) => {
             <UserAvatar imageUrl={imageUrl} firstName={firstName} lastName={lastName} />
             <div className="ml-3">
               <div className="font-medium">{customerFullName}</div>
-              <Rating avgRating={rating.score} />
+              <RatingStar avgRating={rating.score} />
             </div>
           </div>
           <div className="text-sm text-gray-500">{timeDistance}</div>
@@ -36,4 +36,4 @@ const ReviewItem = ({ rating }: ReviewItemProps) => {
   );
 };
 
-export default ReviewItem;
+export default RatingItem;

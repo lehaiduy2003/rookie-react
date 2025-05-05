@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { HeartIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Product } from "@/types/Product";
-import Rating from "./Rating";
+import RatingStar from "./RatingStar";
 
 interface ProductCardProps {
   product: Product;
@@ -40,7 +40,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 {product.name}
               </a>
             </h3>
-            <Rating avgRating={product.avgRating} ratingCount={product.ratingCount} />
+            <RatingStar avgRating={product.avgRating} ratingCount={product.ratingCount} />
           </div>
           <p className="text-lg font-semibold">${product.price.toFixed(2)}</p>
         </div>
